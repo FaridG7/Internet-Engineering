@@ -1,0 +1,73 @@
+@import url("./variables.css");
+@import url("./global.css");
+
+body {
+  background-image: url("/assets/images/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  background: var(--background-color);
+  opacity: 0.8;
+  width: 70vw;
+  height: 90vh;
+  border-radius: 3%;
+}
+.content {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 0.5%;
+}
+.leftside {
+  width: 40%;
+  height: 100%;
+  justify-content: center;
+  /* display: flex; */
+}
+.leftside img {
+  margin-top: 50%;
+}
+.rightside {
+  width: 60%;
+  height: 100%;
+}
+.rightside form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.rightside form * {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 20px;
+}
+.title {
+  margin: 0px;
+  font-size: 35px;
+  text-align: center;
+}
+input {
+  width: 90%;
+  height: 45px;
+  color: black;
+  padding: 10px;
+  border-radius: 3cqmax;
+}
+button {
+  background: var(--secondary-color);
+  width: 90%;
+  height: 50px;
+  font-size: 22px;
+  text-align: center;
+  border-radius: 3cqmax;
+}
+.footer {
+  text-align: center;
+}

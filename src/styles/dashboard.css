@@ -1,0 +1,159 @@
+@import url("./variables.css");
+@import url("./global.css");
+
+body {
+  background-color: var(--background-color);
+}
+
+header {
+  height: 10vh;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+}
+header img {
+  height: 100%;
+  width: auto;
+}
+header nav {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+header nav * {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 20px;
+  font-size: large;
+  text-decoration: none;
+}
+header .setting_icon {
+  margin-right: auto;
+}
+
+main {
+  height: 100vh;
+}
+
+.profile_section {
+  display: flex;
+  flex-direction: row;
+  height: 20vh;
+  width: 100vw;
+  padding: 0.5%;
+}
+
+.profile_picture {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.profile_picture img {
+  height: 75%;
+  width: 250px;
+}
+.profile_picture label {
+  height: 10%;
+  width: 100%;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 10px;
+}
+.statics {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.statics div {
+  width: 50%;
+  height: 50%;
+}
+.statics_title {
+  font-size: large;
+}
+.statics_number {
+  font-size: x-large;
+}
+
+.lists {
+  height: auto;
+}
+.lists h3 {
+  background-color: var(--primary-color);
+  font-size: x-large;
+  padding: 10px;
+}
+.lists ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5%;
+  height: 100%;
+}
+
+.list {
+  height: 100%;
+  width: 250px;
+  margin-right: 20px;
+  border-width: 2px;
+  border-color: var(--primary-color);
+}
+.list a {
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+}
+.list_view {
+  height: 90%;
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--secondary-color);
+}
+.list_view img {
+  height: 50%;
+  width: 33.33%;
+}
+.list_title {
+  background-color: var(--primary-color);
+  width: 100%;
+}
+.latest {
+  height: 30vh;
+}
+
+.latest h3 {
+  background-color: var(--primary-color);
+  font-size: x-large;
+  padding: 10px;
+}
+.latest ul {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.latest ul li {
+  margin-right: 20px;
+}
+.latest ul li a img {
+  height: 330px;
+  width: auto;
+}
+
+button#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+button#theme-toggle:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,243 @@
+@import url("./variables.css");
+@import url("./global.css");
+
+body {
+  background-color: var(--background-color);
+}
+
+header {
+  height: 10vh;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+}
+header img {
+  height: 100%;
+  width: auto;
+}
+header nav {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+header nav * {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 20px;
+  font-size: large;
+  text-decoration: none;
+}
+header .setting_icon {
+  margin-right: auto;
+}
+
+.list h3 {
+  background-color: var(--primary-color);
+  font-size: x-large;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.list ul {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+.list ul li {
+  margin-right: 20px;
+}
+.list ul li a img {
+  height: 330px;
+  width: auto;
+}
+
+.slideshow-container {
+  max-width: 900px; /* Adjust the max width for 6 slides */
+  position: relative;
+  margin: auto;
+  height: 200px; /* Adjust the height to accommodate smaller images */
+  overflow: hidden; /* Hide slides outside the container */
+}
+
+.slide {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px; /* Set fixed width for images */
+  transition: all 0.5s ease-in-out;
+  transform-origin: center;
+  opacity: 0; /* Default opacity, will be updated */
+}
+
+.active {
+  opacity: 1;
+  z-index: 2;
+  left: 50%; /* Center active slide */
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.prev-slide {
+  opacity: 0.5;
+  z-index: 1;
+  left: 30%; /* Position the previous slide */
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.next-slide {
+  opacity: 0.5;
+  z-index: 1;
+  left: 70%; /* Position the next slide */
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.slide img {
+  width: 100%; /* Image takes full width of its slide */
+  height: auto;
+  border-radius: 5px;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 10px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  user-select: none;
+  z-index: 3;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+button#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+button#theme-toggle:hover {
+  opacity: 0.8;
+}
+
+#modalOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+#modalBox {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  width: 90vw;
+  height: 90vh;
+  padding: 20px;
+  text-align: right;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+}
+
+#description {
+  grid-column: 1 / 5;
+  grid-row: 1 / 6;
+}
+
+#media {
+  grid-column: 5 / 10;
+  grid-row: 1 / 6;
+}
+
+#opinion {
+  grid-column: 1 / 10;
+  grid-row: 6 / 10;
+}
+#opinion form {
+  display: grid;
+  grid-template-columns: 10% 10% 25% 35%;
+  justify-content: space-between;
+}
+#opinion select {
+  color: black;
+}
+#opinion select * {
+  color: black;
+  margin-right: 20px;
+}
+
+#opinion textarea {
+  color: black;
+  margin-left: 20%;
+}
+
+#bookmarkBtn,
+#likeBtn,
+#addBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#bookmarkBtn span,
+#likeBtn span,
+#addBtn span {
+  font-size: x-large;
+}
+
+.closeBtn {
+  grid-column: 1/1;
+  grid-row: 10/10;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #f44336;
+  color: var(--text-color);
+  margin-top: 10px;
+}
+.closeBtn:hover {
+  background: #d32f2f;
+}
+
+.submitBtn {
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  margin-top: 10px;
+  display: block;
+}
+.submitBtn:hover {
+  background: var(--secondary-color);
+}
+img {
+  width: 150px;
+}
