@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->execute()) {
             http_response_code(201);
-            header('Location: /login.php');
-            echo json_encode(['success' => 'User registered successfully.']);
+            header('Location: login.php');
+            echo json_encode(['message' => 'User registered successfully.']);
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Failed to register user.']);

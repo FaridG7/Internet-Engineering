@@ -10,12 +10,28 @@
     <div class="container">
       <div class="content">
         <div class="rightside">
-          <form action="./register_api.php" method="post" id="form">
+          <form action="./register_api.php" method="post" id="form" validate>
             <h2 class="title">ثبت نام</h2>
-            <input type="text" placeholder="نام کاربری" />
-            <input type="email" placeholder="ایمیل" id="emailInput" />
-            <input type="password" placeholder="رمز عبور" />
-            <input type="password" placeholder="تکرار رمز عبور" />
+            <input
+              type="text"
+              placeholder="نام کاربری"
+              name="username"
+              required
+            />
+            <input type="email" placeholder="ایمیل" name="email" required />
+            <input
+              type="password"
+              placeholder="رمز عبور"
+              id="passInput"
+              name="password"
+              required
+            />
+            <input
+              type="password"
+              placeholder="تکرار رمز عبور"
+              id="repeatPassInput"
+              required
+            />
             <button>ثبت</button>
           </form>
           <p class="footer">

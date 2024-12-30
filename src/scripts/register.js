@@ -1,14 +1,9 @@
-const form = document.getElementById("form");
-const emailInput = document.getElementById("emailInput");
+document.getElementById("form").addEventListener("submit", (e) => {
+  const passInput = document.getElementById("passInput");
+  const repeatPassInput = document.getElementById("repeatPassInput");
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (emailRegex.test(emailInput)) {
-    alert("Email is valid!");
-    e.target.submit();
-  } else {
-    alert("Please enter a valid email address.");
+  if (passInput.value !== repeatPassInput.value) {
+    e.preventDefault();
+    alert("Passwords don't match.");
   }
 });
