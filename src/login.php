@@ -1,22 +1,11 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     header("Location: dashboard.php");
     exit;
-}
-
-$error = '';
-
-if (isset($_GET["username"])) {
-    require_once 'login_api.php';
-
-    if (login($_GET['username'], $_GET['password'])) {
-        header("Location: dashboard.php");
-        exit;
-    } else {
-        $error = "نام‌کاربری یا رمز عبور غیر معتبر.";
-    }
 }
 ?>
 
@@ -34,11 +23,8 @@ if (isset($_GET["username"])) {
         <span class="logo">
           <img src="./assets/images/logo.png" alt="" />
         </span>
-        <form action="">
+        <form action="./login_api.php" method="post" autocomplete="on">
           <h2 class="title">ورود اعضا</h2>
-          <?php if ($error): ?>
-            <h3><?php echo $error; ?></h3>
-          <?php endif; ?>
           <input type="text" placeholder="نام کاربری" name="username" />
           <input type="password" placeholder="رمز عبور" name="password" />
           <button>ورود</button>

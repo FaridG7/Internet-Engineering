@@ -1,3 +1,14 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +27,6 @@
           <span id="theme-icon" class="icon-sun">☀️</span>
         </button>
         <a href="/movies.html">فیلم‌ها</a>
-        <a href="/series.html">سریال‌ها</a>
         <a href="/support.html" class="setting_icon"><span>&#9881;</span></a>
       </nav>
     </header>
