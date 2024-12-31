@@ -7,6 +7,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
     header("Location: login.php");
     exit;
 }
+
+require 'db_connection.php';
+
+$preferences_sql = "SELECT title, prefered FROM genre_preferences WHERE user_id = " . $_SESSION['user_id'];
+
+$preferences_result = $conn->query($preferences_sql);
+
+$preferd_genres = [];
+$nonpreferd_genres = [];
+while ($row = $result->fetch_assoc()) {
+    if($row['prefered'] == 1){
+      $preferd_genres[] = $row;
+    }else{
+      $nonpreferd_genres[] = $row;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,31 +51,41 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
       <div class="profile_section">
         <div class="profile_picture">
           <img src="./assets/icons/intersect.svg" alt="" />
-          <label>نام کاربری</label>
+          <label>
+            <?php
+              echo $_SESSION['username'];
+            ?>
+          </label>
         </div>
         <div class="statics">
-          <div>
-            <p class="statics_title">تعداد کل فیلم‌های دیده شده</p>
-            <p class="statics_number">76</p>
-          </div>
-          <div>
-            <p class="statics_title">تعداد کل سریال‌های تماشا شده</p>
-            <p class="statics_number">33</p>
-          </div>
-          <div>
-            <p class="statics_title">تعداد فیلم‌‌های تماشا شده این هفته</p>
-            <p class="statics_number">2</p>
-          </div>
-          <div>
-            <p class="statics_title">تعداد سریال‌های تماشا شده این هفته</p>
-            <p class="statics_number">3</p>
-          </div>
+          <!-- TODO: add preferences and nonpreferences -->
+
+           <p>ژانر‌هایی که دوست دارید:</p>
+           <?php
+            if(count($preferd_genres) > 0){
+              foreach ($preferd_genres as $row) {
+                echo "<span>" . $row['title'] . "</span>";
+              }
+            }else{
+              echo "<h3>_</h3>";
+            }
+           ?>
+           <p>ژانر‌هایی که دوست ندارید:</p>
+          <?php
+            if(count($nonpreferd_genres) > 0){
+              foreach ($nonpreferd_genres as $row) {
+                echo "<span>" . $row['title'] . "</span>";
+              }
+            }else{
+              echo "<h3>_</h3>";
+            }
+          ?>
         </div>
       </div>
       <div class="lists">
-        <h3>لیست‌های من</h3>
+        <h3>لیست‌های شما</h3>
         <ul>
-          <li class="list">
+          <!-- <li class="list">
             <a href="#">
               <div class="list_view">
                 <img src="./assets/posters/1.webp" alt="" />
@@ -72,77 +99,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
                 <label>مورد علاقه‌های من</label>
               </div>
             </a>
-          </li>
-          <li class="list">
-            <a href="#">
-              <div class="list_view">
-                <img src="./assets/posters/8.webp" alt="" />
-                <img src="./assets/posters/13.webp" alt="" />
-                <img src="./assets/posters/9.webp" alt="" />
-                <img src="./assets/posters/17.webp" alt="" />
-                <img src="./assets/posters/11.webp" alt="" />
-                <img src="./assets/posters/16.webp" alt="" />
-              </div>
-              <div class="list_title">
-                <label>بعدا تماشا می‌کنم</label>
-              </div>
-            </a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="latest">
-        <h3>آخرین‌های تماشا شده</h3>
+        <h3>پیشنهادی‌های شما</h3>
         <ul>
-          <li>
+          <!-- <li>
             <a href="#">
               <img src="./assets/posters/22.webp" alt="" />
             </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/14.webp" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/3.jpg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/10.webp" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/25.webp" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/22.webp" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/14.webp" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/3.jpg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/10.webp" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="./assets/posters/25.webp" alt="" />
-            </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </main>
