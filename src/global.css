@@ -1,4 +1,16 @@
-@import url("./variables.css");
+:root {
+  --primary-color: #013ff9;
+  --secondary-color: #f5247d;
+  --background-color: #2f63fe;
+  --text-color: #ffffff;
+}
+
+[data-theme="dark"] {
+  --primary-color: #4a8dfc;
+  --secondary-color: #f765a3;
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+}
 
 * {
   margin: 0;

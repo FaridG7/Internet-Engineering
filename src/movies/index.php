@@ -80,7 +80,6 @@
         <div class="slide">
           <img src="./assets/posters/10.webp" alt="Slide 1" />
         </div>
-        <!-- Navigation buttons -->
         <button class="prev" onclick="changeSlide(-1)">&#10095;</button>
         <button class="next" onclick="changeSlide(1)">&#10094;</button>
       </div>
