@@ -1,3 +1,12 @@
+<?php
+  require "db_connection.php";
+
+  $genres_result = $conn->query("SELECT id, title FROM genres");
+  $slides_result = $conn->query("SELECT id FROM movies ORDER BY RAND() LIMIT 10;");
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -63,88 +72,32 @@
 
     <main>
       <div class="slideshow-container">
+      <?php
+          while ($slide = $slides_result->fetch_assoc()) {
+            echo '<li><button id="openModal"><img src="./assets/posters/'. $slide['movie_id'] .'.webp"/></button></li>'; 
+          }
+        ?>
         <div class="slide">
-          <a href="#">
-            <img src="./assets/posters/10.webp" alt="Slide 1" />
-          </a>
-        </div>
-        <div class="slide">
-          <a href="#">
-            <img src="./assets/posters/12.webp" alt="Slide 2" />
-          </a>
-        </div>
-        <div class="slide">
-          <a href="#">
-            <img src="./assets/posters/22.webp" alt="Slide 3" />
-          </a>
-        </div>
-        <div class="slide">
-          <a href="#">
-            <img src="./assets/posters/11.webp" alt="Slide 4" />
-          </a>
-        </div>
-        <div class="slide">
-          <a href="#">
-            <img src="./assets/posters/20.webp" alt="Slide 5" />
-          </a>
-        </div>
-        <div class="slide">
-          <a href="#">
-            <img src="./assets/posters/2.webp" alt="Slide 6" />
-          </a>
+          <img src="./assets/posters/10.webp" alt="Slide 1" />
         </div>
         <!-- Navigation buttons -->
         <button class="prev" onclick="changeSlide(-1)">&#10095;</button>
         <button class="next" onclick="changeSlide(1)">&#10094;</button>
       </div>
       <div class="list">
-        <h3>پیشنهادی برای شما</h3>
-        <ul>
-          <li>
-            <img src="./assets/posters/22.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/14.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/3.jpg" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/10.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/25.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/2.webp" alt="" id="openModal" />
-          </li>
-        </ul>
-      </div>
-      <div class="list">
-        <h3>برترین‌ها</h3>
-        <ul>
-          <li>
-            <img src="./assets/posters/12.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/24.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/21.jpg" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/10.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/4.webp" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/6.jpg" alt="" id="openModal" />
-          </li>
-          <li>
-            <img src="./assets/posters/5.webp" alt="" id="openModal" />
-          </li>
-        </ul>
+        <?php
+          while($genre = $genres_result->fetch_assoc()){
+            echo "<h3>".$genre["title"]."</h3>";
+            echo "<ul>";
+            $movies_result = $conn->query("SELECT movie_id FROM movie_genres WHERE genre_id =".$genre['id']." LIMIT 10;");
+            while ($movie = $movies_result->fetch_assoc()) {
+              echo '<li><button id="openModal"><img src="./assets/posters/'.
+               $movie['movie_id'] 
+               .'.webp"/></button></li>'; 
+            }
+            echo "</ul>";
+          }
+        ?>
       </div>
     </main>
     <script type="module" src="./scripts/movies.js"></script>
