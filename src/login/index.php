@@ -23,11 +23,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <span class="logo">
           <img src="../assets/images/logo.png" alt="" />
         </span>
+        <h2 class="title">ورود اعضا</h2>
         <form action="./api.php" method="post" autocomplete="on">
-          <h2 class="title">ورود اعضا</h2>
-          <input type="text" placeholder="نام کاربری" name="username" />
-          <input type="password" placeholder="رمز عبور" name="password" />
-          <button>ورود</button>
+          <input type="text" placeholder="نام کاربری" name="username" required/>
+          <input type="password" placeholder="رمز عبور" name="password" required/>
+          <input type="submit" value="ورود" class="submitButton"/>
         </form>
         <p class="footer">عضو نیستید؟ <a href="../register">عضو شوید</a></p>
       </div>
