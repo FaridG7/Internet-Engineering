@@ -4,11 +4,11 @@
   }
 
   if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
-      header("Location: login.php");
+      header("Location: /login");
       exit;
   }
 
-  require 'db_connection.php';
+  require '../db_connection.php';
 
   $genre_preferences_sql = "SELECT title, prefered FROM genre_preferences WHERE user_id = " . $_SESSION['user_id'];
 
@@ -24,7 +24,6 @@
     }
   }
 
-
   $lists_sql = "SELECT title, id FROM list WHERE user_id = " . $_SESSION['user_id'];
 
   $list_result = $conn->query($lists_sql);
@@ -34,23 +33,33 @@
     $lists[] = $row;
   }
 
-  $preferredGenresTitles = array_map(function($genre) {
-    return $genre->title;
+  $preferredGenresIDs = array_map(function($genre) {
+    return $genre->id;
   }, $preferd_genres);
 
-  $nonpreferredGenresTitles = array_map(function($genre) {
-    return $genre->title;
+  $nonpreferredGenresIDs = array_map(function($genre) {
+    return $genre->id;
   }, $nonpreferd_genres);
 
-  $preferredGenresString = implode(",", $preferredGenresTitles);
-  $nonpreferredGenresString = implode(",", $nonpreferredGenresTitles);
-  
+  if (empty($preferredGenresIds)) {
+    $preferredGenresString = "NULL";
+  } else {
+    $preferredGenresString = implode(",", $preferredGenresIds);
+  }
+
+  if (empty($nonpreferredGenresIds)) {
+    $nonpreferredGenresString = "NULL";
+  } else {
+    $nonpreferredGenresString = implode(",", $nonpreferredGenresIds);
+  }
+
+
   $suggested_movies_sql = "
       SELECT DISTINCT mg.movie_id
       FROM movie_genres mg
-      JOIN genres g ON mg.genre_id = g.genre_id
-      WHERE g.genre_id IN ($preferredGenresString)
-      AND g.genre_id NOT IN ($nonpreferredGenresString)
+      JOIN genres g ON mg.genre_id = g.id
+      WHERE g.id IN ($preferredGenresString)
+      AND g.id NOT IN ($nonpreferredGenresString)
   ";
   
   $suggested_movies_result = $conn->query($suggested_movies_sql);
@@ -62,26 +71,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/dashboard.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
     <title>Dashboard</title>
   </head>
   <body dir="rtl">
-    <header>
-      <a href="./dashboard.html">
-        <img src="./assets/images/logo.png" alt="" />
-      </a>
-      <nav>
-        <button id="theme-toggle" aria-label="Toggle Dark Mode">
-          <span id="theme-icon" class="icon-sun">☀️</span>
-        </button>
-        <a href="/movies.html">فیلم‌ها</a>
-        <a href="/support.html" class="setting_icon"><span>&#9881;</span></a>
-      </nav>
-    </header>
+    <?php
+      require("../components/header.php");
+    ?>
     <main>
       <div class="profile_section">
         <div class="profile_picture">
-          <img src="./assets/icons/intersect.svg" alt="" />
+          <img src="../assets/icons/intersect.svg" alt="" />
           <label>
             <?php
               echo $_SESSION['username'];

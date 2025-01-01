@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'db_connection.php';
+require '../db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['user_id'] = $user['id'];
                 $conn->close();
-                header("Location: dashboard.php");
+                header("Location: /dashboard");
             }
             else {
                 http_response_code(403);

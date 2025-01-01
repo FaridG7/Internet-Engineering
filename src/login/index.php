@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    header("Location: dashboard.php");
+    header("Location: /dashboard");
     exit;
 }
 ?>
@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
           <img src="../assets/images/logo.png" alt="" />
         </span>
         <h2 class="title">ورود اعضا</h2>
-        <form action="./api.php" method="post" autocomplete="on">
+        <form action="../api/login_api.php" method="post" autocomplete="on">
           <input type="text" placeholder="نام کاربری" name="username" required/>
           <input type="password" placeholder="رمز عبور" name="password" required/>
           <input type="submit" value="ورود" class="submitButton"/>
