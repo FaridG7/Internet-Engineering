@@ -9,63 +9,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <body dir="rtl">
   <?php
     require("../components/header.php");
+    require("../components/modal.php");
   ?>
-  <body dir="rtl">
-    <header>
-      <a href="./dashboard.html">
-        <img src="./assets/images/logo.png" alt="" />
-      </a>
-      <nav>
-        <button id="theme-toggle" aria-label="Toggle Dark Mode">
-          <span id="theme-icon" class="icon-sun">☀️</span>
-        </button>
-        <a href="./movies.html">فیلم‌ها</a>
-        <a href="./series.html">سریال‌ها</a>
-        <a href="#" class="setting_icon"><span>&#9881;</span></a>
-      </nav>
-    </header>
-
-    <div id="modalOverlay">
-      <div id="modalBox">
-        <div class="description">
-          <h2 id="MovieTitle">نام فیلم</h2>
-          <p id="Year"><label for="">سال ساخت: </label>۱۴۰۰</p>
-          <p id="Director"><label for="">کارگردان: </label>یه بنده خدا</p>
-          <p id="Stars">
-            <label for="">ستارگان: </label>بنده خدا ۱، بنده خدا ۲، ...
-          </p>
-          <p id="Genre"><label for="">ژانر: </label>کمدی</p>
-          <p id="Summary">
-            <label for="">خلاصه داستان: </label>یکی بود، یکی نبود
-          </p>
-        </div>
-        <div id="media" dir="ltr">
-          <img src="./assets/posters/28.webp" alt="poster" />
-          <video src="">failed to load the video</video>
-          <button id="bookmarkBtn"><span>&#9734;</span></button>
-          <button id="likeBtn"><span>&#x2764;</span></button>
-          <button id="addBtn"><span>&#x2795;</span></button>
-        </div>
-        <div id="opinion">
-          <form action="">
-            <label for="">امتیاز شما:</label>
-            <select name="" id="">
-              <option value="5">&#9734;&#9734;&#9734;&#9734;&#9734;</option>
-              <option value="4">&#9734;&#9734;&#9734;&#9734;</option>
-              <option value="3">&#9734;&#9734;&#9734;</option>
-              <option value="2">&#9734;&#9734;</option>
-              <option value="1">&#9734;</option>
-            </select>
-            <label for="">نظر شما:</label>
-            <textarea name="" id=""></textarea>
-            <button type="submit" class="submitBtn">ثبت نظر</button>
-            <button class="closeBtn" id="closeModal">بستن</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    
 
     <main>
       <div class="slideshow-container">

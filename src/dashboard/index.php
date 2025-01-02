@@ -77,10 +77,11 @@
   <body dir="rtl">
     <?php
       require("../components/header.php");
+      require("../components/modal.php");
     ?>
     <main>
       <div class="profile_section">
-        <div class="profile_picture">
+        <div class="profile">
           <img src="../assets/icons/intersect.svg" alt="" />
           <label>
             <?php
@@ -88,50 +89,61 @@
             ?>
           </label>
         </div>
-        <div class="statics">
-           <p>ژانر‌هایی که دوست دارید:</p>
-           <?php
+        <div class="preferred_genres">
+          <div>
+
+            <p>ژانر‌هایی که دوست دارید:&nbsp;</p>
+            <?php
             if(count($preferd_genres) > 0){
               foreach ($preferd_genres as $row) {
                 echo "<span>" . $row['title'] . "</span>";
               }
             }else{
-              echo "<h3>_</h3>";
+              echo "<span>-</span>";
             }
-           ?>
-           <p>ژانر‌هایی که دوست ندارید:</p>
-          <?php
+            ?>
+            </div>
+            <div>
+
+              <p>ژانر‌هایی که دوست ندارید:&nbsp;</p>
+              <?php
             if(count($nonpreferd_genres) > 0){
               foreach ($nonpreferd_genres as $row) {
                 echo "<span>" . $row['title'] . "</span>";
               }
             }else{
-              echo "<h3>_</h3>";
+              echo "<span>-</span>";
             }
-          ?>
+            ?>
+            </div>
         </div>
       </div>
       <div class="lists">
         <h3>لیست‌های شما</h3>
-        <ul>
           <?php
+          if(count($lists) > 0){
+            echo "<ul>";
             foreach ($lists as $list) {
               echo "<li><a href=/list?id=". $list['id'] ."><label>" . $list['title'] . "</label></a></li>";
             }
-          ?>
-        </ul>
+            echo "</ul>";
+          }else {
+            echo "<span>لیستی یافت نشد.</span>";
+          }
+            ?>
       </div>
-      <div class="latest">
+      <div class="suggestion_section">
         <h3>پیشنهادی‌های شما</h3>
           <?php
-            if ($suggested_movies_result->num_rows > 0) {
+            if ($suggested_movies_result->num_rows > 0 || true) {
               echo "<ul>";
               while ($row = $suggested_movies_result->fetch_assoc()) {
-                echo '<li><button id="openModal"><img src="./assets/posters/'. $row['movie_id'] .'.webp"/></button></li>'; 
+                echo '<li class="poster"><button id="openModal"><img src="./assets/posters/'. $row['movie_id'] .'.webp"/></button></li>'; 
               }
+              echo '<li class="poster" ><button id="openModal"><img src="../assets/posters/'. "1" .'.webp"/></button></li>'; 
               echo "</ul>";
             }else{
-              echo "_";
+              echo "<span>فیلم پیشنهادی یافت نشد.(بخش ژانرهای مورد علاقه‌ را به روز کنید)</span>";
             }
           ?>
       </div>

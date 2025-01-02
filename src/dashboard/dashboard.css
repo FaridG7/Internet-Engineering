@@ -4,80 +4,41 @@ body {
   background-color: var(--background-color);
 }
 
-header {
-  height: 10vh;
-  background-color: var(--primary-color);
-  display: flex;
-  flex-direction: row;
-}
-header img {
-  height: 100%;
-  width: auto;
-}
-header nav {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-}
-header nav * {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 20px;
-  font-size: large;
-  text-decoration: none;
-}
-header .setting_icon {
-  margin-right: auto;
-}
-
-main {
-  height: 100vh;
-}
-
 .profile_section {
   display: flex;
   flex-direction: row;
   height: 20vh;
-  width: 100vw;
-  padding: 0.5%;
+  padding: 1%;
 }
-
-.profile_picture {
+.profile {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.profile_picture img {
+.profile img {
   height: 75%;
   width: 250px;
 }
-.profile_picture label {
+.profile label {
   height: 10%;
   width: 100%;
   text-align: center;
   font-size: large;
   margin-bottom: 10px;
 }
-.statics {
+
+.preferred_genres {
   height: 100%;
+  width: auto;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
-.statics div {
-  width: 50%;
-  height: 50%;
-}
-.statics_title {
-  font-size: large;
-}
-.statics_number {
-  font-size: x-large;
+.preferred_genres div {
+  display: flex;
 }
 
-.lists {
-  height: auto;
-}
 .lists h3 {
   background-color: var(--primary-color);
   font-size: x-large;
@@ -88,45 +49,23 @@ main {
   flex-direction: row;
   padding: 0.5%;
   height: 100%;
-}
-
-.list {
-  height: 100%;
-  width: 250px;
-  margin-right: 20px;
-  border-width: 2px;
-  border-color: var(--primary-color);
-}
-.list a {
-  height: 100%;
-  width: 100%;
-  text-decoration: none;
-}
-.list_view {
-  height: 90%;
-  width: auto;
-  display: flex;
   flex-wrap: wrap;
-  background: var(--secondary-color);
 }
-.list_view img {
-  height: 50%;
-  width: 33.33%;
+.lists ul li {
+  margin: 2%;
 }
-.list_title {
-  background-color: var(--primary-color);
-  width: 100%;
-}
-.latest {
-  height: 30vh;
+.lists span {
+  display: block;
+  padding: 2%;
+  text-align: center;
 }
 
-.latest h3 {
+.suggestion_section h3 {
   background-color: var(--primary-color);
   font-size: x-large;
   padding: 10px;
 }
-.latest ul {
+.suggestion_section ul {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -135,12 +74,17 @@ main {
   overflow-x: scroll;
 }
 
-.latest ul li {
+.poster {
   margin-right: 20px;
 }
-.latest ul li a img {
+.poster button img {
   height: 330px;
   width: auto;
+}
+.suggestion_section span {
+  display: block;
+  padding: 2%;
+  text-align: center;
 }
 
 button#theme-toggle {
@@ -152,7 +96,6 @@ button#theme-toggle {
   color: var(--text-color);
   transition: color 0.3s;
 }
-
 button#theme-toggle:hover {
   opacity: 0.8;
 }
