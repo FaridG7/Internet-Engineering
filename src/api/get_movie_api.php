@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $genres[] = $genre['name'];
             }
 
-            // Fetch stars for the movie
             $stars_query = "SELECT s.name FROM stars s WHERE s.movie_id = $movie_id";
             $stars_result = $conn->query($stars_query);
 
@@ -75,14 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $stars[] = $star['name'];
             }
 
-            // Build the response
             $response = [
-                'movie' => $movie,
+                'title' => $movie['title'],
+                'director' => $movie['director'],
+                'summary' => $movie['summary'],
+                'year' => $movie['produce_date'],
                 'genres' => $genres,
                 'stars' => $stars
             ];
 
-            // Return JSON response
             header('Content-Type: application/json');
             echo json_encode($response);
         } else {

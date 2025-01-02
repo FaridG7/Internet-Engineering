@@ -135,12 +135,11 @@
       <div class="suggestion_section">
         <h3>پیشنهادی‌های شما</h3>
           <?php
-            if ($suggested_movies_result->num_rows > 0 || true) {
+            if ($suggested_movies_result->num_rows > 0) {
               echo "<ul>";
               while ($row = $suggested_movies_result->fetch_assoc()) {
-                echo '<li class="poster"><button id="openModal"><img src="./assets/posters/'. $row['movie_id'] .'.webp"/></button></li>'; 
+                echo '<li class="poster"><button id="openModal" movie_id='. $row['movie_id'] .'><img src="./assets/posters/'. $row['movie_id'] .'.webp"/></button></li>'; 
               }
-              echo '<li class="poster" ><button id="openModal"><img src="../assets/posters/'. "1" .'.webp"/></button></li>'; 
               echo "</ul>";
             }else{
               echo "<span>فیلم پیشنهادی یافت نشد.(بخش ژانرهای مورد علاقه‌ را به روز کنید)</span>";
@@ -148,6 +147,6 @@
           ?>
       </div>
     </main>
-    <script type="module" src="./scripts/dashboard.js"></script>
+    <script type="module" src="./dashboard.js"></script>
   </body>
 </html>

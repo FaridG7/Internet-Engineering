@@ -11,7 +11,8 @@
   align-items: center;
   z-index: 1000;
 }
-.modalBox {
+
+.loadingIndicator{
   background-color: var(--background-color);
   border-radius: 8px;
   width: 90vw;
@@ -20,9 +21,24 @@
   text-align: right;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
+}
+.loadingIndicator h2{
+  text-align: center;
+  margin: auto;
+}
+.modalBox {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  width: 90vw;
+  height: 90vh;
+  padding: 20px;
+  text-align: right;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
   flex-wrap: wrap;
   overflow-y: scroll;
 }
+
 .description {
   width: 30%;
   height: 50%;
@@ -97,34 +113,42 @@
   background: var(--primary-color);
 }
 .submitBtn:hover {
-  background: var(--secondary-color);
+  background: rgb(10, 194, 111);
 }
 </style>
 
-<div class="modalOverlay">
-  <div class="modalBox">
+<div class="modalOverlay" id="modalOverlay">
+  <div class="loadingIndicator" id="loadingIndicator">
+    <h2>در حال بارگذاری...</h2>
+  </div>
+  <div class="modalBox" id="modalBox">
     <div class="description">
-      <h2 id="MovieTitle">نام فیلم</h2>
-      <p id="Year"><label for="">سال ساخت: </label>۱۴۰۰</p>
-      <p id="Director"><label for="">کارگردان: </label>یه بنده خدا</p>
-      <p id="Stars">
-        <label for="">ستارگان: </label>بنده خدا ۱، بنده خدا ۲، ...
+      <h3 id="MovieTitle">نام فیلم</h3>
+      <p>سال ساخت:&nbsp;<label id="Year">۱۴۰۰</label></p>
+      <p>
+        کارگردان:&nbsp;
+      <label id="Director">
+        یه بنده خدا
+      </label>
+    </p>
+      <p >
+        ستارگان:&nbsp;<label id="Stars">بنده خدا ۱، بنده خدا ۲، ...</label>
       </p>
-      <p id="Genre"><label for="">ژانر: </label>کمدی</p>
-      <p id="Summary"><label for="">خلاصه داستان: </label>یکی بود، یکی نبود</p>
+      <p id="Genre">ژانر:&nbsp;<label for="">کمدی</label></p>
+      <p>خلاصه داستان:&nbsp;<label id="Summary">یکی بود، یکی نبود</label></p>
     </div>
     <div class="poster_section" dir="ltr">
-      <img src="../assets/posters/28.webp" alt="poster" />
-      <video controls>
-        ویدیوی موردنظر یافت نشد.
+      <img src="../assets/posters/28.webp" alt="پوستر" id="poster"/>
+      <video controls id="trailer">
       </video>
       <button class="addBtn"><span>&#x2795;</span></button>
     </div>
     <div class="comment_section">
-      <form action="">
+      <form action="../api/comment.php" method="post">
+        <input name="movie_id" disabled style="display: none;" id="movie_id">
         <div>
-          <label for="">امتیاز شما:</label>
-          <select name="rating" id="ratingInput">
+          <label>امتیاز شما:</label>
+          <select name="rating">
             <option value="5">&#9734;&#9734;&#9734;&#9734;&#9734;</option>
             <option value="4">&#9734;&#9734;&#9734;&#9734;</option>
             <option value="3">&#9734;&#9734;&#9734;</option>
@@ -133,11 +157,11 @@
           </select>
         </div>
         <div>
-          <label for="">نظر شما:</label>
-          <textarea name="text" id="commentText" rows="4"></textarea>
+          <label>نظر شما:</label>
+          <textarea name="text" rows="4"></textarea>
         </div>
         <div>
-          <button type="submit" class="submitBtn">ثبت نظر</button>
+          <button type="submit" class="submitBtn" id="closeModal">ثبت نظر</button>
           <button class="closeBtn" id="closeModal">بستن</button>
         </div>
       </form>
