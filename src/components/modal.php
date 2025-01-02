@@ -19,74 +19,82 @@
   padding: 20px;
   text-align: right;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
 }
 .description {
-  grid-column: 1 / 5;
-  grid-row: 1 / 6;
+  width: 30%;
+  height: 50%;
 }
-.media {
-  grid-column: 5 / 10;
-  grid-row: 1 / 6;
+
+.poster_section {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  height: 50%;
 }
-.opinion {
-  grid-column: 1 / 10;
-  grid-row: 6 / 10;
+.poster_section img{
+  height: 250px;
+  width: auto;
+  margin: 1%;
 }
-.opinion form {
-  display: grid;
-  grid-template-columns: 10% 10% 25% 35%;
-  justify-content: space-between;
+.poster_section video{
+  width: 320px;
+  height: 250px;
+  margin: 1%;
 }
-.opinion select {
-  color: black;
-}
-.opinion select * {
-  color: black;
-  margin-right: 20px;
-}
-.opinion textarea {
-  color: black;
-  margin-left: 20%;
-}
-.bookmarkBtn,
-.likeBtn,
 .addBtn {
+  margin-top: auto;
+  margin-bottom: 1%;
   border: none;
   background: none;
   cursor: pointer;
 }
-.bookmarkBtn span,
-.likeBtn span,
 .addBtn span {
   font-size: x-large;
 }
-.closeBtn {
-  grid-column: 1/1;
-  grid-row: 10/10;
+
+.comment_section {
+  width: 100%;
+}
+.comment_section form {
+  display: flex;
+  flex-direction: column;
+}
+.comment_section form div{
+  margin: 1%;
+  display: flex;
+}
+.comment_section form select,
+.comment_section form select *,
+.comment_section form textarea {
+  color: black;
+}
+.comment_section form select,
+.comment_section form textarea {
+  margin: 0px 10px;
+}
+.comment_section form textarea {
+  width: 300px;
+}
+.closeBtn,.submitBtn {
   border: none;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 4px;
   font-size: 16px;
-  background: #f44336;
   color: var(--text-color);
-  margin-top: 10px;
+  margin: 0px 20px;
+}
+.closeBtn {
+  background: #f44336;
 }
 .closeBtn:hover {
   background: #d32f2f;
 }
 .submitBtn {
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 4px;
   background: var(--primary-color);
-  color: var(--text-color);
-  margin-top: 10px;
-  display: block;
 }
 .submitBtn:hover {
   background: var(--secondary-color);
@@ -107,25 +115,31 @@
     </div>
     <div class="poster_section" dir="ltr">
       <img src="../assets/posters/28.webp" alt="poster" />
-      <video src="">failed to load the video</video>
-      <button id="bookmarkBtn"><span>&#9734;</span></button>
-      <button id="likeBtn"><span>&#x2764;</span></button>
-      <button id="addBtn"><span>&#x2795;</span></button>
+      <video controls>
+        ویدیوی موردنظر یافت نشد.
+      </video>
+      <button class="addBtn"><span>&#x2795;</span></button>
     </div>
     <div class="comment_section">
       <form action="">
-        <label for="">امتیاز شما:</label>
-        <select name="rating" id="ratingInput">
-          <option value="5">&#9734;&#9734;&#9734;&#9734;&#9734;</option>
-          <option value="4">&#9734;&#9734;&#9734;&#9734;</option>
-          <option value="3">&#9734;&#9734;&#9734;</option>
-          <option value="2">&#9734;&#9734;</option>
-          <option value="1">&#9734;</option>
-        </select>
-        <label for="">نظر شما:</label>
-        <textarea name="text" id="commentText"></textarea>
-        <button type="submit" class="submitBtn">ثبت نظر</button>
-        <button class="closeBtn" id="closeModal">بستن</button>
+        <div>
+          <label for="">امتیاز شما:</label>
+          <select name="rating" id="ratingInput">
+            <option value="5">&#9734;&#9734;&#9734;&#9734;&#9734;</option>
+            <option value="4">&#9734;&#9734;&#9734;&#9734;</option>
+            <option value="3">&#9734;&#9734;&#9734;</option>
+            <option value="2">&#9734;&#9734;</option>
+            <option value="1">&#9734;</option>
+          </select>
+        </div>
+        <div>
+          <label for="">نظر شما:</label>
+          <textarea name="text" id="commentText" rows="4"></textarea>
+        </div>
+        <div>
+          <button type="submit" class="submitBtn">ثبت نظر</button>
+          <button class="closeBtn" id="closeModal">بستن</button>
+        </div>
       </form>
     </div>
   </div>
