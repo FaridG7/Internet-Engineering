@@ -147,6 +147,6 @@
           ?>
       </div>
     </main>
-    <script type="module" src="./dashboard.js"></script>
+    <script type="module" src="../components/modal_logic.js"></script>
   </body>
 </html>
