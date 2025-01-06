@@ -53,7 +53,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-    //TODO
+    $movie_id = trim($_POST['movie_id']);
+
+    if (empty($movie_id)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'movie_id is required.']);
+        exit;
+    }
+    try {
+        $stmt = $conn->prepare("SELECT * FROM comments WHERE movie_id = ? AND user_id = ?");
+        $stmt->bind_param("ss", $movie_id, $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            http_response_code(200);
+            header('Content-Type: application/json');
+            echo json_encode($result->fetch_assoc());
+        }else{
+            http_response_code(404);
+            echo json_encode(['error' => "requested comment not found."]);
+        }
+        $stmt->close();
+        exit;
+
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
+    }
 }
 else {
     http_response_code(405);
