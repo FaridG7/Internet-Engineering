@@ -1,9 +1,24 @@
+<?php
+  require "db_connection.php";
+
+  $slides_result = $conn->query("SELECT id FROM movies ORDER BY RAND() LIMIT 7;");
+?>
+<div class="slideshow-container">
+    <?php
+        while ($slide = $slides_result->fetch_assoc()) {
+          echo '<div class="slide"><button id="openModal"><img src="./assets/posters/'. $slide['id'] .'.webp"/></button></div>'; 
+        }
+    ?>
+    <button class="prev" onclick="changeSlide(-1)">&#10095;</button>
+    <button class="next" onclick="changeSlide(1)">&#10094;</button>
+</div>
+<script>
 let currentSlide = 0;
 const slideInterval = 3000;
 
 const slides = document.querySelectorAll(".slide");
-
 function showSlide(index) {
+
   if (index >= slides.length) currentSlide = 0;
   if (index < 0) currentSlide = slides.length - 1;
 
@@ -32,3 +47,4 @@ setInterval(() => {
   currentSlide += 1;
   showSlide(currentSlide);
 }, slideInterval);
+</script>
