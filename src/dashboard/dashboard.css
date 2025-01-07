@@ -86,16 +86,3 @@ body {
   padding: 2%;
   text-align: center;
 }
-
-button#theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  color: var(--text-color);
-  transition: color 0.3s;
-}
-button#theme-toggle:hover {
-  opacity: 0.8;
-}

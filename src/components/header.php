@@ -1,15 +1,15 @@
 <header style="height: 10vh;background-color: var(--primary-color);display: flex;flex-direction: row;">
+  <a href="/logout" style="margin-left: 20px;font-size: small;text-decoration: none;margin-top:auto;margin-bottom:auto;">&rarr;خروج </a>
   <a href="/dashboard">
     <img src="../assets/images/logo.png" alt="" style="height: 100%; width:auto;"/>
   </a>
   <nav style="display: flex;flex-direction: row;width: 80%;">
-    <a href="/src/logout"><button>خروج &rarr;</button></a>
-    <button id="theme-toggle" aria-label="Toggle Dark Mode">
-      <span id="theme-icon" class="icon-sun">☀️</span>
+    <button id="theme-toggle" style="background: none;border: none;cursor: pointer;font-size: 1.5rem;padding: 0.5rem;color: var(--text-color);transition: color 0.3s;">
+      <span id="theme-icon">☀️</span>
     </button>
-    <a href="/src/movies/" style="margin-right: 20px;font-size: large;text-decoration: none;margin-top:auto;margin-bottom:auto;">فیلم‌ها</a>
-    <a href="/src/support/" style="margin-right: auto;text-decoration: none;margin-top:auto;margin-bottom:auto;"><span>?</span></a>
-    <a href="/src/settings/" style="margin-right: 1%;text-decoration: none;margin-top:auto;margin-bottom:auto;"><span>&#9881;</span></a>
+    <a href="/movies/" style="margin-right: 20px;font-size: large;text-decoration: none;margin-top:auto;margin-bottom:auto;">فیلم‌ها</a>
+    <a href="/support/" style="margin-right: auto;text-decoration: none;margin-top:auto;margin-bottom:auto;"><span>?</span></a>
+    <a href="/settings/" style="margin-right: 1%;text-decoration: none;margin-top:auto;margin-bottom:auto;"><span>&#9881;</span></a>
   </nav>
 </header>
 <script>

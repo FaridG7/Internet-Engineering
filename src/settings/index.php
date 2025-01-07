@@ -29,20 +29,28 @@
     <main>
       <form action="../AJAX/prefered.php" method="post" onsubmit="handleFormSubmit(event)">
         <table>
-          <thead>
-            <td>
-               ژانر
-            </td>
-            <td>
-              وضعیت
-            </td>
-          </thead>
-          <?php
+        <thead>
+          <th>ژانر</th>
+          <th>وضعیت</th>
+        </thead>
+          <tbody>
+            <?php
             while ($genre = $preferences_result->fetch_assoc()) {
-              
+              echo '<tr>
+                      <td>'.$genre['title'].'</td>
+                      <td>
+                        <select name="" id="">
+                          <option value="N/A" '. ($genre['prefered'] ===  NULL? "selected":"") .'>نامشخص</option>
+                          <option value="0"'. ($genre['prefered'] ===  0? "selected":"") .'>بد</option>
+                          <option value="1"'. ($genre['prefered'] ===  1? "selected":"") .'>خوب</option>
+                        </select>
+                      </td>
+                    </tr>';
             }
-          ?>
+            ?>
+          </tbody>
         </table>
+        <input type="submit" value="ثبت تغییرات">
       </form>
     </main>
   </body>
