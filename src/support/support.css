@@ -4,32 +4,6 @@ body {
   background-color: var(--background-color);
 }
 
-header {
-  height: 10vh;
-  background-color: var(--primary-color);
-  display: flex;
-  flex-direction: row;
-}
-header img {
-  height: 100%;
-  width: auto;
-}
-header nav {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-}
-header nav * {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 20px;
-  font-size: large;
-  text-decoration: none;
-}
-header .setting_icon {
-  margin-right: auto;
-}
-
 main {
   display: flex;
   flex-direction: column;
@@ -39,20 +13,6 @@ main {
 h2 {
   text-align: center;
   justify-content: center;
-}
-
-button#theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  color: var(--text-color);
-  transition: color 0.3s;
-}
-
-button#theme-toggle:hover {
-  opacity: 0.8;
 }
 
 .accordion {

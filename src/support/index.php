@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/support.css" />
+    <link rel="stylesheet" href="./support.css" />
     <title>Support</title>
   </head>
   <body dir="rtl">
+    <?php
+      require("../components/header.php");
+    ?>
     <main>
       <h2>سوالات پرتکرار</h2>
 
