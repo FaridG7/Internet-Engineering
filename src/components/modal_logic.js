@@ -22,7 +22,7 @@ openModalBtns.forEach((btn) =>
     modalBox.style.display = "none";
     modalOverlay.style.display = "flex";
 
-    fetch(URL + `/api/get_movie_api.php?id=${e.target.movie_id}`)
+    fetch(URL + `/AJAX/get_movie.php?id=${e.target.movie_id}`)
       .then((res) => JSON.parse(res))
       .then((data) => {
         movieTitle.innerHTML = data.title;

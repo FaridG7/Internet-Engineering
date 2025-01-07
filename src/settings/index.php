@@ -39,7 +39,7 @@
               echo '<tr>
                       <td class="label">'.$genre['title'].'</td>
                       <td class="option">
-                        <select name="" id="">
+                        <select name="items[]" id="">
                           <option value="N/A" '. ($genre['prefered'] ===  NULL ? "selected":"") .'>نامشخص</option>
                           <option value="0"'. ($genre['prefered'] ===  0 ? "selected":"") .'>بد</option>
                           <option value="1"'. ($genre['prefered'] ===  1 ? "selected":"") .'>خوب</option>
@@ -53,5 +53,31 @@
         <input type="submit" value="ثبت تغییرات" class="submitBtn">
       </form>
     </main>
+    <script>
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const items = formData.getAll('items[]');
+
+    fetch(URL + "/AJAX/preferences.php", {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ items }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert("تغییرات با موفقیت ذخیره شد.")
+      })
+      .catch(error => {
+        alert(`خطایی رخ داد:‌ ${error}`)
+      });
+  }
+</script>
+
   </body>
 </html>
