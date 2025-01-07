@@ -10,16 +10,16 @@
 
   require '../db_connection.php';
 
-  $genre_preferences_sql = "SELECT title, prefered FROM genre_preferences WHERE user_id = " . $_SESSION['user_id'];
+  $genre_preferences_sql = "SELECT genre_id, title, prefered FROM genre_preferences WHERE user_id = " . $_SESSION['user_id'];
 
   $preferences_result = $conn->query($genre_preferences_sql);
 
   $preferd_genres = [];
   $nonpreferd_genres = [];
   while ($row = $preferences_result->fetch_assoc()) {
-    if($row['prefered'] == 1){
+    if($row['prefered'] === 1){
       $preferd_genres[] = $row;
-    }else{
+    }else if($row['prefered'] === 0){
       $nonpreferd_genres[] = $row;
     }
   }
@@ -34,11 +34,11 @@
   }
 
   $preferredGenresIDs = array_map(function($genre) {
-    return $genre->id;
+    return $genre->genre_id;
   }, $preferd_genres);
 
   $nonpreferredGenresIDs = array_map(function($genre) {
-    return $genre->id;
+    return $genre->genre_id;
   }, $nonpreferd_genres);
 
   if (empty($preferredGenresIds)) {

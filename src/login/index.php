@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
           <img src="../assets/images/logo.png" alt="" />
         </span>
         <h2 class="title">ورود اعضا</h2>
-        <form action="../api/login_api.php" method="post" autocomplete="on">
+        <form action="../AJAX/login_api.php" method="post" autocomplete="on">
           <input type="text" placeholder="نام کاربری" name="username" required/>
           <input type="password" placeholder="رمز عبور" name="password" required/>
           <input type="submit" value="ورود" class="submitButton"/>

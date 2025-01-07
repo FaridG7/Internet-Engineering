@@ -144,7 +144,7 @@
       <button class="addBtn"><span>&#x2795;</span></button>
     </div>
     <div class="comment_section">
-      <form action="../api/comment.php" method="post">
+      <form action="../AJAX/comment.php" method="post">
         <input name="movie_id" disabled style="display: none;" id="movie_id">
         <div>
           <label>امتیاز شما:</label>

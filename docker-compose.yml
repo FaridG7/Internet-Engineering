@@ -13,6 +13,11 @@ services:
       - mysql
     networks:
       - app-network
+    environment:
+      DB_HOST: mysql
+      DB_USER: popcorn
+      DB_PASS: popcorn20
+      DB_NAME: popcorn
 
   mysql:
     image: mysql:8.0

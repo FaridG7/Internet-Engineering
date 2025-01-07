@@ -1,8 +1,8 @@
 <?php
-$servername = "mysql";
-$username = "popcorn";
-$password = "popcorn20";
-$dbname = "popcorn";
+$servername = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASS');
+$dbname = getenv('DB_NAME');
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

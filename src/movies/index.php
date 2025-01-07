@@ -14,7 +14,7 @@
   ?>
     <main>
       <?php
-        require("../components/slideshow.php")
+        require("../components/slideshow.php");
       ?>
       <div class="list">
         <?php
