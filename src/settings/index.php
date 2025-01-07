@@ -19,8 +19,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/support.css" />
-    <title>Support</title>
+    <link rel="stylesheet" href="./settings.css">
+    <title>Settings</title>
   </head>
   <body dir="rtl">
     <?php
@@ -37,12 +37,12 @@
             <?php
             while ($genre = $preferences_result->fetch_assoc()) {
               echo '<tr>
-                      <td>'.$genre['title'].'</td>
-                      <td>
+                      <td class="label">'.$genre['title'].'</td>
+                      <td class="option">
                         <select name="" id="">
-                          <option value="N/A" '. ($genre['prefered'] ===  NULL? "selected":"") .'>نامشخص</option>
-                          <option value="0"'. ($genre['prefered'] ===  0? "selected":"") .'>بد</option>
-                          <option value="1"'. ($genre['prefered'] ===  1? "selected":"") .'>خوب</option>
+                          <option value="N/A" '. ($genre['prefered'] ===  NULL ? "selected":"") .'>نامشخص</option>
+                          <option value="0"'. ($genre['prefered'] ===  0 ? "selected":"") .'>بد</option>
+                          <option value="1"'. ($genre['prefered'] ===  1 ? "selected":"") .'>خوب</option>
                         </select>
                       </td>
                     </tr>';
@@ -50,7 +50,7 @@
             ?>
           </tbody>
         </table>
-        <input type="submit" value="ثبت تغییرات">
+        <input type="submit" value="ثبت تغییرات" class="submitBtn">
       </form>
     </main>
   </body>
