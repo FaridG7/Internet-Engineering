@@ -55,38 +55,38 @@ $conn->close();
       <input type="submit" value="ثبت تغییرات" class="submitBtn">
     </form>
   </main>
-  <scrip>
+  <script>
     document.querySelector("form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const selects = document.querySelectorAll("select");
+      e.preventDefault();
+      const selects = document.querySelectorAll("select");
 
-    const formData = {};
-    selects.forEach((select) => {
-    if (select.name) {
-    formData[select.name] = select.value;
-    }
-    });
+      const formData = {};
+      selects.forEach((select) => {
+        if (select.name) {
+          formData[select.name] = select.value;
+        }
+      });
 
-    fetch("/AJAX/preferences.php", {
-    method: "PUT",
-    headers: {
-    "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-    })
-    .then((response) => {
-    console.log(response);
-    return response.json();
-    })
-    .then((data) => {
-    alert("تغییرات با موفقیت ذخیره شد.");
-    })
-    .catch((error) => {
-    alert(error);
-    // alert(`خطایی رخ داد:‌ ${error}`)
+      fetch("/AJAX/preferences.php", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          alert("تغییرات با موفقیت ذخیره شد.");
+        })
+        .catch((error) => {
+          alert(error);
+          // alert(`خطایی رخ داد:‌ ${error}`)
+        });
     });
-    });
-    </script>
+  </script>
 </body>
 
 </html>
