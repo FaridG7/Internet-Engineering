@@ -38,16 +38,17 @@ $conn->close();
         <tbody>
           <?php
           while ($genre = $preferences_result->fetch_assoc()) {
+            $prefered = is_null($genre['prefered']) ? null : intval($genre['prefered']);
             echo '<tr>
-                      <td class="label">' . $genre['title'] . '</td>
-                      <td class="option">
-                        <select name="' . $genre['genre_id'] . '" id="">
-                          <option value="N/A" ' . ($genre['prefered'] ===  NULL ? "selected" : "") . '>نامشخص</option>
-                          <option value="0"' . ($genre['prefered'] ===  0 ? "selected" : "") . '>دوست ندارم</option>
-                          <option value="1"' . ($genre['prefered'] ===  1 ? "selected" : "") . '>دوست دارم</option>
-                        </select>
-                      </td>
-                    </tr>';
+              <td class="label">' . htmlspecialchars($genre['title'], ENT_QUOTES, 'UTF-8') . '</td>
+              <td class="option">
+                <select name="' . htmlspecialchars($genre['genre_id'], ENT_QUOTES, 'UTF-8') . '" id="">
+                  <option value="N/A" ' . ($prefered === null ? "selected" : "") . '>نامشخص</option>
+                  <option value="0" ' . ($prefered === 0 ? "selected" : "") . '>دوست ندارم</option>
+                  <option value="1" ' . ($prefered === 1 ? "selected" : "") . '>دوست دارم</option>
+                </select>
+              </td>
+          </tr>';
           }
           ?>
         </tbody>
