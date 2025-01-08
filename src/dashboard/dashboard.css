@@ -37,11 +37,16 @@ body {
 }
 .preferred_genres div {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.preferred_genres div * {
+  margin: 0.5%;
 }
 span.genre {
   font-size: medium;
   background: #554658;
-  margin: 0.5%;
   display: inline;
 }
 

@@ -41,24 +41,22 @@ $nonpreferredGenresIDs = array_map(function ($genre) {
   return $genre['genre_id'];
 }, $nonpreferd_genres);
 
-if (empty($preferredGenresIds)) {
+if (empty($preferredGenresIDs)) {
   $preferredGenresString = "NULL";
 } else {
-  $preferredGenresString = implode(",", $preferredGenresIds);
+  $preferredGenresString = implode(",", $preferredGenresIDs);
 }
 
-if (empty($nonpreferredGenresIds)) {
+if (empty($nonpreferredGenresIDs)) {
   $nonpreferredGenresString = "NULL";
 } else {
-  $nonpreferredGenresString = implode(",", $nonpreferredGenresIds);
+  $nonpreferredGenresString = implode(",", $nonpreferredGenresIDs);
 }
-
 $suggested_movies_result = $conn->query("
-      SELECT DISTINCT mg.movie_id
-      FROM movie_genres mg
-      JOIN genres g ON mg.genre_id = g.id
-      WHERE g.id IN ($preferredGenresString)
-      AND g.id NOT IN ($nonpreferredGenresString)
+      SELECT DISTINCT movie_id
+      FROM movie_genres
+      WHERE genre_id IN ($preferredGenresString)
+      AND genre_id NOT IN ($nonpreferredGenresString)
       ORDER BY RAND() LIMIT 10;
   ");
 
@@ -74,7 +72,6 @@ $conn->close();
   <link rel="stylesheet" href="./dashboard.css" />
   <title>Dashboard</title>
 </head>
-
 <body dir="rtl">
   <?php
   require("../components/header.php");
@@ -92,7 +89,6 @@ $conn->close();
       </div>
       <div class="preferred_genres">
         <div>
-
           <p>ژانر‌هایی که دوست دارید:&nbsp;</p>
           <?php
           if (count($preferd_genres) > 0) {
