@@ -14,7 +14,14 @@ require '../db_connection.php';
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $input_data = json_decode(file_get_contents('php://input'), true);
 
-    $valid_values = ['N/A', '0', '1'];
+    if (json_last_error() !== JSON_ERROR_NONE || empty($input_data)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid or empty JSON payload.']);
+        exit;
+    }
+    
+
+    $valid_values = ['null', '0', '1'];
     
     $genres_result = $conn->query("SELECT id FROM genres");
     while ($genre = $genres_result->fetch_assoc()) {
@@ -25,31 +32,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         }
     }
     try {
-        $stmt = $conn->prepare("DELETE FROM preferences WHERE user_id = ?");
-        $stmt->bind_param("s",$_SESSION['user_id']);
-    
-        if ($stmt->execute()) {
-            $stmt->close();
-            foreach ($input_data as $genre_id => $preference) {
-                if($preference !== "N/A"){
-                    $stmt = $conn->prepare("INSERT INTO preferences (genre_id, user_id, prefered) VALUES(?,?,?)");
-                    $stmt->bind_param("sss", $genre_id, $_SESSION['user_id'], $preference);
-                    
-                    if ($stmt->execute()) {
-                        http_response_code(201);
-                        echo json_encode(['message' => 'Changes applied successfully.']);
-                    } else {
-                        http_response_code(500);
-                        echo json_encode(['error' => 'Failed to apply changes.']);
-                    }
-                    $stmt->close();
+        $delete_stmt = $conn->prepare("DELETE FROM preferences WHERE user_id = ? AND genre_id = ?");
+        $insert_stmt = $conn->prepare("INSERT INTO preferences (genre_id, user_id, prefered) VALUES(?,?,?) ON DUPLICATE KEY UPDATE prefered = ?");
+
+        foreach ($input_data as $genre_id => $preference) {
+            if($preference !== "null"){
+                $insert_stmt->bind_param("ssss", $genre_id, $_SESSION['user_id'], $preference, $preference);
+                if (!$insert_stmt->execute()) {
+                    http_response_code(500);
+                    echo json_encode(['error' => 'Failed to apply changes.']);
+                    $insert_stmt->close();
+                    exit;
+                }
+            }else{
+                $delete_stmt->bind_param("ss",$_SESSION['user_id'], $genre_id);
+                if (!$delete_stmt->execute()) {
+                    http_response_code(500);
+                    echo json_encode(['error' => 'Failed to apply changes.']);
+                    $delete_stmt->close();
+                    exit;
                 }
             }
-        } else {
-            $stmt->close();
-            http_response_code(500);
-            echo json_encode(['error' => 'Failed to apply changes.']);
         }
+        http_response_code(200);
+        echo json_encode(['message' => 'Changes applied successfully.']);
+        $delete_stmt->close();
+        $insert_stmt->close();
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);

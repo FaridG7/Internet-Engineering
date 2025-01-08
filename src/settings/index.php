@@ -40,9 +40,9 @@
                       <td class="label">'.$genre['title'].'</td>
                       <td class="option">
                         <select name="'.$genre['genre_id'].'" id="">
-                          <option value="N/A" '. ($genre['prefered'] ===  NULL ? "selected":"") .'>نامشخص</option>
-                          <option value="0"'. ($genre['prefered'] ===  0 ? "selected":"") .'>بد</option>
-                          <option value="1"'. ($genre['prefered'] ===  1 ? "selected":"") .'>خوب</option>
+                          <option value="null" '. ($genre['prefered'] ===  NULL ? "selected":"") .'>نامشخص</option>
+                          <option value="0"'. ($genre['prefered'] ===  0 ? "selected":"") .'>دوست ندارم</option>
+                          <option value="1"'. ($genre['prefered'] ===  1 ? "selected":"") .'>دوست دارم</option>
                         </select>
                       </td>
                     </tr>';
@@ -57,7 +57,7 @@
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    const selects = form.querySelectorAll('select');
+    const selects = document.querySelectorAll('select');
 
     const formData = {};
     selects.forEach(select => {
@@ -79,7 +79,8 @@
         alert("تغییرات با موفقیت ذخیره شد.")
       })
       .catch(error => {
-        alert(`خطایی رخ داد:‌ ${error}`)
+        alert(error)
+        // alert(`خطایی رخ داد:‌ ${error}`)
       });
   }
 </script>

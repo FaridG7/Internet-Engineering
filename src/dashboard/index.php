@@ -52,17 +52,16 @@
   } else {
     $nonpreferredGenresString = implode(",", $nonpreferredGenresIds);
   }
-
-
-  $suggested_movies_sql = "
+  
+  $suggested_movies_result = $conn->query("
       SELECT DISTINCT mg.movie_id
       FROM movie_genres mg
       JOIN genres g ON mg.genre_id = g.id
       WHERE g.id IN ($preferredGenresString)
       AND g.id NOT IN ($nonpreferredGenresString)
-  ";
+      ORDER BY RAND() LIMIT 10;
+  ");
   
-  $suggested_movies_result = $conn->query($suggested_movies_sql);
   $conn->close();
 ?>
 
