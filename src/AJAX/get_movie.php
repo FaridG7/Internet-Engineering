@@ -12,15 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
         $movie_id = $conn->real_escape_string($movie_id);
 
-        $movie_result = $conn->query("SELECT * FROM movies WHERE id =".$movie_id);
-        $genres_result = $conn->query("SELECT genre_id FROM movie_genres WHERE movie_id =".$movie_id);
-        $starts_result = $conn->query("SELECT name FROM stars WHERE movie_id =".$movie_id);
+        $movie_result = $conn->query("SELECT * FROM movies WHERE id =" . $movie_id);
+        $genres_result = $conn->query("SELECT genre_id FROM movie_genres WHERE movie_id =" . $movie_id);
+        $starts_result = $conn->query("SELECT name FROM stars WHERE movie_id =" . $movie_id);
 
         if ($movie_result->num_rows > 0) {
             $movie = $result->fetch_assoc();
-
-        }
-        else {
+        } else {
             http_response_code(404);
             echo json_encode(['error' => 'Movie not found.']);
         }

@@ -28,13 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $user['id'];
                 $conn->close();
                 header("Location: /dashboard");
-            }
-            else {
+            } else {
                 http_response_code(403);
                 echo json_encode(['error' => 'Wrong Username or Password.']);
             }
-        }
-        else {
+        } else {
             http_response_code(403);
             echo json_encode(['error' => 'Wrong Username or Password.']);
         }
@@ -47,4 +45,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Invalid request method.']);
 }
-?>
