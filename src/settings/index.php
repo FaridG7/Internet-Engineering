@@ -42,7 +42,7 @@ $conn->close();
                       <td class="label">' . $genre['title'] . '</td>
                       <td class="option">
                         <select name="' . $genre['genre_id'] . '" id="">
-                          <option value="null" ' . ($genre['prefered'] ===  NULL ? "selected" : "") . '>نامشخص</option>
+                          <option value="N/A" ' . ($genre['prefered'] ===  NULL ? "selected" : "") . '>نامشخص</option>
                           <option value="0"' . ($genre['prefered'] ===  0 ? "selected" : "") . '>دوست ندارم</option>
                           <option value="1"' . ($genre['prefered'] ===  1 ? "selected" : "") . '>دوست دارم</option>
                         </select>
@@ -76,14 +76,10 @@ $conn->close();
         })
         .then((response) => {
           console.log(response);
-          return response.json();
-        })
-        .then((data) => {
-          alert("تغییرات با موفقیت ذخیره شد.");
+          if (response.ok) alert("تغییرات با موفقیت ذخیره شد.");
         })
         .catch((error) => {
-          alert(error);
-          // alert(`خطایی رخ داد:‌ ${error}`)
+          alert(`خطایی رخ داد.`)
         });
     });
   </script>
