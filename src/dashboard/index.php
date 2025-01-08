@@ -139,7 +139,7 @@ $conn->close();
       if ($suggested_movies_result->num_rows > 0) {
         echo "<ul>";
         while ($row = $suggested_movies_result->fetch_assoc()) {
-          echo '<li class="poster"><button id="openModal" movie_id=' . $row['movie_id'] . '><img src="./assets/posters/' . $row['movie_id'] . '.webp"/></button></li>';
+          echo '<li class="poster"><button id="openModal" movie_id=' . $row['movie_id'] . '><img src="/assets/posters/' . $row['movie_id'] . '.webp"/></button></li>';
         }
         echo "</ul>";
       } else {
