@@ -1,5 +1,5 @@
 <?php
-  require "db_connection.php";
+  require "../db_connection.php";
 
   $genres_result = $conn->query("SELECT id, title FROM genres");
   $slides_result = $conn->query("SELECT id FROM movies ORDER BY RAND() LIMIT 10;");
@@ -7,6 +7,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./movies.css">
+    <title>Movies</title>
+  </head>
   <body dir="rtl">
   <?php
     require("../components/header.php");

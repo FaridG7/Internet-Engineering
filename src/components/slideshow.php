@@ -1,7 +1,10 @@
 <?php
-  require "db_connection.php";
+  require_once "../db_connection.php";
 
   $slides_result = $conn->query("SELECT id FROM movies ORDER BY RAND() LIMIT 7;");
+
+  if ($slides_result && $slides_result->num_rows > 0) {
+
 ?>
 <div class="slideshow-container">
     <?php
@@ -48,3 +51,6 @@ setInterval(() => {
   showSlide(currentSlide);
 }, slideInterval);
 </script>
+<?php
+  }
+?>
