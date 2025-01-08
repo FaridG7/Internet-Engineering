@@ -38,6 +38,12 @@ body {
 .preferred_genres div {
   display: flex;
 }
+span.genre {
+  font-size: medium;
+  background: #554658;
+  margin: 0.5%;
+  display: inline;
+}
 
 .lists h3 {
   background-color: var(--primary-color);
