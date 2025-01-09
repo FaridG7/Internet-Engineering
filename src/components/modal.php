@@ -155,7 +155,7 @@
       <p>خلاصه داستان:&nbsp;<label id="Summary">یکی بود، یکی نبود</label></p>
     </div>
     <div class="poster_section" dir="ltr">
-      <img src="../assets/posters/28.webp" alt="پوستر" id="poster" />
+      <img src="" alt="پوستر" id="poster" />
       <video controls id="trailer">
       </video>
       <button class="addBtn"><span>&#x2795;</span></button>

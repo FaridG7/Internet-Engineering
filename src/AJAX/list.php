@@ -13,17 +13,14 @@ require '../db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     http_response_code(405);
-    echo json_encode(['error' => 'Invalid request method.']);
 }
 
 $title = trim($_POST['title']);
 
-if (empty($title)) {
+if (!isset($title) && empty($title)) {
     http_response_code(400);
-    echo json_encode(['error' => 'title field is required.']);
     exit;
 }
-
 try {
     $check_stmt = $conn->prepare("SELECT * FROM list WHERE user_id = ? AND title = ?");
     $check_stmt->bind_param("ss", $_SESSION['user_id'], $title);
@@ -32,7 +29,6 @@ try {
 
     if ($check_stmt->num_rows > 0) {
         http_response_code(409);
-        echo json_encode(['error' => 'This user already has a list with this title.']);
         exit;
     }
 
@@ -43,12 +39,10 @@ try {
 
     if ($insert_stmt->execute()) {
         http_response_code(201);
-        echo json_encode(['message' => 'List inserted successfully.']);
     } else {
         throw new Exception('Failed to insert list.', 1);
     }
     $insert_stmt->close();
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
 }

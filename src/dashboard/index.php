@@ -117,7 +117,22 @@ $conn->close();
       </div>
     </div>
     <div class="lists">
-      <h3>لیست‌های شما</h3>
+      <h3>لیست‌های شما<button class="addBtn" onclick="addList()"><span>&#x2795;</span></button></h3>
+      <script>
+        function addList() {
+          const title = prompt("لطفا نام لیست را وارد کنید");
+          fetch(`/AJAX/list.php`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `title=${encodeURIComponent(title)}`,
+          }).then(res => {
+            if (res.ok) alert("لیست با موفقیت اضافه شد.");
+            else alert("خطایی رخ داد.");
+          });
+        }
+      </script>
       <?php
       if (count($lists) > 0) {
         echo "<ul>";

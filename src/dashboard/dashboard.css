@@ -70,6 +70,15 @@ span.genre {
   padding: 2%;
   text-align: center;
 }
+.addBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.addBtn span {
+  font-size: small;
+}
 
 .suggestion_section h3 {
   background-color: var(--primary-color);
