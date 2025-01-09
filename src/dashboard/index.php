@@ -72,6 +72,7 @@ $conn->close();
   <link rel="stylesheet" href="./dashboard.css" />
   <title>Dashboard</title>
 </head>
+
 <body dir="rtl">
   <?php
   require("../components/header.php");

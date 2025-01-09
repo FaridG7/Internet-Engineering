@@ -1,0 +1,19 @@
+@import url("../global.css");
+
+body {
+  background-color: var(--background-color);
+}
+
+ul {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: scroll;
+}
+ul li {
+  margin-right: 20px;
+}
+ul li img {
+  height: 330px;
+  width: auto;
+}
