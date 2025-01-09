@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +14,8 @@
 </head>
 
 <body dir="rtl">
-    <?php
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
 
+    <?php
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
         header("Location: /login");
         exit;
