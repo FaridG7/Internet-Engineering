@@ -9,8 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./movies.css">
-    <title>Movies</title>
+    <link rel="stylesheet" href="./list.css">
+    <title>List</title>
 </head>
 
 <body dir="rtl">
@@ -44,12 +44,16 @@ if (session_status() === PHP_SESSION_NONE) {
         ?>
         <main>
             <?php
-            while ($movie_id = $list_members->fetch_assoc()) {
-                echo "<ul>";
-                echo '<li class="poster"><button id="openModal" movie_id=' .
-                    $movie_id . '><img src="/assets/posters/' .
-                    $movie_id . '.webp"/></button></li>';
-                echo "</ul>";
+            if ($list_members->num_rows > 0) {
+                while ($movie_id = $list_members->fetch_assoc()) {
+                    echo "<ul>";
+                    echo '<li class="poster"><button id="openModal" movie_id=' .
+                        $movie_id . '><img src="/assets/posters/' .
+                        $movie_id . '.webp"/></button></li>';
+                    echo "</ul>";
+                }
+            } else {
+                echo '<h2>این لیست خالی است.</h2>';
             }
             ?>
         </main>

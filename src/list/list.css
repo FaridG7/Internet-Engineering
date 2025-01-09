@@ -4,6 +4,13 @@ body {
   background-color: var(--background-color);
 }
 
+h2 {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin-top: 40vh;
+}
+
 ul {
   margin-top: 10px;
   display: flex;

@@ -158,7 +158,8 @@
       <img src="" alt="پوستر" id="poster" />
       <video controls id="trailer">
       </video>
-      <button class="addBtn"><span>&#x2795;</span></button>
+      <button class="addBtn" id="addBtn"><span>&#x2795;</span></button>
+      <select id="lists"></select>
     </div>
     <div class="comment_section">
       <form action="../AJAX/comment.php" method="post">

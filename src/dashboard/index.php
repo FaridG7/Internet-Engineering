@@ -123,17 +123,21 @@ $conn->close();
           const title = prompt("لطفا نام لیست را وارد کنید");
           if (title === null) return;
           fetch(`/AJAX/list.php`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `title=${encodeURIComponent(title)}`,
-          }).then(res => {
-            if (res.ok) {
-              alert("لیست با موفقیت اضافه شد.");
-              location.reload();
-            } else alert("خطایی رخ داد.");
-          });
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: `title=${encodeURIComponent(title)}`,
+            }).then(res => {
+              if (res.ok) {
+                alert("لیست با موفقیت اضافه شد.");
+                location.reload();
+              } else alert("خطایی رخ داد.");
+            })
+            .catch((err) => {
+              alert(err);
+              console.log(err);
+            });
         }
       </script>
       <?php
