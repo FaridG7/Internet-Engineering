@@ -10,14 +10,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || !isset($
 }
 
 require '../db_connection.php';
-try {
-    if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
-        http_response_code(405);
-        header('Content-Type: application/json');
-        echo json_encode(['error' => 'Invalid request method.']);
-        exit;
-    }
+if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+    http_response_code(405);
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Invalid request method.']);
+    exit;
+}
 
+try {
     $input_data = json_decode(file_get_contents('php://input'), true);
     if (!is_array($input_data) || json_last_error() !== JSON_ERROR_NONE || empty($input_data)) {
         http_response_code(400);
@@ -25,7 +25,7 @@ try {
         echo json_encode(['error' => 'Invalid or empty JSON payload.']);
         exit;
     }
-
+    $conn->begin_transaction();
     $genres_result = $conn->query("SELECT id FROM genres");
     if (!$genres_result || $genres_result->num_rows === 0) {
         http_response_code(500);
@@ -77,12 +77,15 @@ try {
         // fclose($log_file);
         throw new Exception("Error Processing Request", 1);
     }
-
+    $conn->commit();
     http_response_code(200);
     header('Content-Type: application/json');
     echo json_encode(['message' => 'Changes applied successfully.']);
 } catch (Exception $e) {
+    $conn->rollback();
     http_response_code(500);
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
+} finally {
+    $conn->close();
 }
