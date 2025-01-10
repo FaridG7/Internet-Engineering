@@ -122,7 +122,7 @@ $conn->close();
         function addList() {
           const title = prompt("لطفا نام لیست را وارد کنید");
           if (title === null) return;
-          fetch(`/AJAX/list.php`, {
+          fetch(`/AJAX/lists.php`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

@@ -107,6 +107,7 @@
   .comment_section form select *,
   .comment_section form textarea {
     color: black;
+    padding: 1%;
   }
 
   .comment_section form select,
@@ -185,7 +186,7 @@
     </div>
     <div class="comment_section">
       <form action="../AJAX/comment.php" method="post">
-        <input name="movie_id" disabled style="display: none;" id="movie_id">
+        <input type="number" name="movie_id" style="display: none;" id="movieIDinput">
         <div>
           <label>امتیاز شما:</label>
           <select name="rating">

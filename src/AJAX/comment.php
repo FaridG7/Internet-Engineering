@@ -1,6 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-  session_start();
+    session_start();
 }
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
@@ -13,24 +13,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
 require '../db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $movie_id = trim($_POST['movie_id']);
-    $rating = trim($_POST['rating']);
-    $text = trim($_POST['text']);
-
-    if (empty($movie_id) || empty($rating) || empty($text)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'All fields are required.']);
-        exit;
-    }
     try {
+        $movie_id = $_POST['movie_id'];
+        $rating = trim($_POST['rating']);
+        $text = trim($_POST['text']);
+
+        if (empty($movie_id) || !is_numeric($movie_id) || empty($rating) || empty($text)) {
+            echo $_POST['movie_id'];
+            http_response_code(400);
+            exit;
+        }
         $stmt = $conn->prepare("SELECT * FROM comments WHERE movie_id = ? AND user_id = ?");
-        $stmt->bind_param("ss", $movie_id, $_SESSION['user_id']);
+        $stmt->bind_param("ii", $movie_id, $_SESSION['user_id']);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
             http_response_code(409);
-            echo json_encode(['error' => "you can't add another comment on this movie."]);
             exit;
         }
 
@@ -41,49 +40,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->execute()) {
             http_response_code(201);
-            echo json_encode(['message' => 'Comment added successfully.']);
         } else {
             http_response_code(500);
-            echo json_encode(['error' => 'Failed to add comment.']);
         }
         $stmt->close();
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
     }
-}
-else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-    $movie_id = trim($_POST['movie_id']);
+} else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $movie_id = $_GET['movie_id'];
 
     if (empty($movie_id)) {
         http_response_code(400);
-        echo json_encode(['error' => 'movie_id is required.']);
         exit;
     }
     try {
-        $stmt = $conn->prepare("SELECT * FROM comments WHERE movie_id = ? AND user_id = ?");
-        $stmt->bind_param("ss", $movie_id, $_SESSION['user_id']);
+        $stmt = $conn->prepare("SELECT * FROM comments WHERE movie_id = ?");
+        $stmt->bind_param("i", $movie_id);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             http_response_code(200);
             header('Content-Type: application/json');
             echo json_encode($result->fetch_assoc());
-        }else{
+        } else {
             http_response_code(404);
-            echo json_encode(['error' => "requested comment not found."]);
         }
         $stmt->close();
         exit;
-
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
     }
-}
-else {
+} else {
     http_response_code(405);
-    echo json_encode(['error' => 'Invalid request method.']);
 }
-
-?>

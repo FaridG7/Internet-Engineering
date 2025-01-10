@@ -31,9 +31,9 @@ $slides_result = $conn->query("SELECT id FROM movies ORDER BY RAND() LIMIT 10;")
         echo "<ul>";
         $movies_result = $conn->query("SELECT movie_id FROM movie_genres WHERE genre_id =" . $genre['id'] . " LIMIT 10;");
         while ($movie = $movies_result->fetch_assoc()) {
-          echo '<li class="poster"><button id="openModal" movie_id=' .
-            $movie['movie_id'] . '><img src="/assets/posters/' .
-            $movie['movie_id'] . '.webp"/></button></li>';
+          echo '<li class="poster"><button id="openModal" ><img src="/assets/posters/'
+            . $movie['movie_id'] . '.webp" movie_id='
+            . $movie['movie_id'] . ' /></button></li>';
         }
         echo "</ul>";
       }

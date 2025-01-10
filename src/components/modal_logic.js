@@ -12,7 +12,7 @@ const genre = document.getElementById("Genre");
 const summary = document.getElementById("Summary");
 const poster = document.getElementById("poster");
 const trailer = document.getElementById("trailer");
-const movieID = document.getElementById("movie_id");
+const movieID = document.getElementById("movieIDinput");
 const listSelectElem = document.getElementById("list");
 const listBtn = document.getElementById("listBtn");
 
@@ -42,13 +42,13 @@ listBtn.addEventListener("click", () => {
 
 openModalBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    movie_id = e.target.getAttribute("movie_id");
+    movie_id = Number(e.target.getAttribute("movie_id"));
     loadingIndicator.style.display = "flex";
     modalBox.style.display = "none";
     modalOverlay.style.display = "flex";
 
     const fetch1 = fetch(`/AJAX/get_movie.php?id=${movie_id}`);
-    const fetch2 = fetch("/AJAX/get_lists.php");
+    const fetch2 = fetch("/AJAX/lists.php");
 
     Promise.all([fetch1, fetch2])
       .then(([response1, response2]) => {

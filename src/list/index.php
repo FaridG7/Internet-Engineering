@@ -45,11 +45,11 @@ if (session_status() === PHP_SESSION_NONE) {
         <main>
             <?php
             if ($list_members->num_rows > 0) {
-                while ($movie_id = $list_members->fetch_assoc()) {
+                while ($list_member = $list_members->fetch_assoc()) {
                     echo "<ul>";
-                    echo '<li class="poster"><button id="openModal" movie_id=' .
-                        $movie_id . '><img src="/assets/posters/' .
-                        $movie_id . '.webp"/></button></li>';
+                    echo '<li class="poster"><button id="openModal"><img src="/assets/posters/'
+                        . $list_member['movie_id'] . '.webp"  movie_id='
+                        . $list_member['movie_id'] . ' /></button></li>';
                     echo "</ul>";
                 }
             } else {
