@@ -13,23 +13,52 @@ const summary = document.getElementById("Summary");
 const poster = document.getElementById("poster");
 const trailer = document.getElementById("trailer");
 const movieID = document.getElementById("movie_id");
-const listsSelectElem = document.getElementById("lists");
-const addBtn = document.getElementById("addBtn");
+const listSelectElem = document.getElementById("list");
+const listBtn = document.getElementById("listBtn");
 
-openModalBtns.forEach((btn) =>
+let movie_id = undefined;
+
+listBtn.addEventListener("click", () => {
+  fetch(`/AJAX/list_member.php`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: `list_id=${encodeURIComponent(
+      listSelectElem.value
+    )}&movie_id=${encodeURIComponent(movie_id)}`,
+  })
+    .then((res) => {
+      if (res.ok) {
+        alert("فیلم با موفقیت به لیست اضافه شد.");
+        location.reload();
+      } else alert("خطایی رخ داد.");
+    })
+    .catch((err) => {
+      alert(err);
+      console.log(err);
+    });
+});
+
+openModalBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
+    movie_id = e.target.getAttribute("movie_id");
     loadingIndicator.style.display = "flex";
     modalBox.style.display = "none";
     modalOverlay.style.display = "flex";
-    addBtn.removeEventListener("click");
 
-    const fetch1 = fetch(`/AJAX/get_movie.php?id=${e.target.movie_id}`);
+    const fetch1 = fetch(`/AJAX/get_movie.php?id=${movie_id}`);
     const fetch2 = fetch("/AJAX/get_lists.php");
 
     Promise.all([fetch1, fetch2])
-      .then(([response1, response2]) =>
-        Promise.all([response1.json(), response2.json()])
-      )
+      .then(([response1, response2]) => {
+        if (response1.ok && response2.ok)
+          return Promise.all([response1.json(), response2.json()]);
+        else
+          throw new Error(
+            `responce1: ${response1.status}, responce2: ${response2.status}`
+          );
+      })
       .then(([data, lists]) => {
         movieTitle.innerHTML = data.title;
         year.innerHTML = data.year;
@@ -37,40 +66,19 @@ openModalBtns.forEach((btn) =>
         stars.innerHTML = data.stars;
         genre.innerHTML = data.genres;
         summary.innerHTML = data.summary;
-        poster.src = `/assets/posters/${e.target.movie_id}.webp`;
+        poster.src = `/assets/posters/${movie_id}.webp`;
         const newSourceElem = document.createElement("source");
-        newSourceElem.src = `/assets/trailers/${e.target.movie_id}.mp4`;
+        newSourceElem.src = `/assets/trailers/${movie_id}.mp4`;
         trailer.replaceChildren(newSourceElem);
-        movieID.value = e.target.movie_id;
+        movieID.value = movie_id;
         lists.forEach((list) => {
           const optionElem = document.createElement("option");
           optionElem.value = list.id;
           optionElem.innerHTML = list.title;
-          listsSelectElem.appendChild(optionElem);
+          listSelectElem.appendChild(optionElem);
         });
       })
       .then(() => {
-        addBtn.addEventListener("click", () => {
-          fetch(`/AJAX/list_member.php`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `list_id=${encodeURIComponent(
-              listsSelectElem.value
-            )}&movie_id=${encodeURIComponent(e.target.movie_id)}`,
-          })
-            .then((res) => {
-              if (res.ok) {
-                alert("فیلم با موفقیت به لیست اضافه شد.");
-                location.reload();
-              } else alert("خطایی رخ داد.");
-            })
-            .catch((err) => {
-              alert(err);
-              console.log(err);
-            });
-        });
         loadingIndicator.style.display = "none";
         modalBox.style.display = "flex";
       })
@@ -78,8 +86,8 @@ openModalBtns.forEach((btn) =>
         alert(error);
         console.error(error);
       });
-  })
-);
+  });
+});
 
 closeModalBtns.forEach((btn) =>
   btn.addEventListener("click", () => {

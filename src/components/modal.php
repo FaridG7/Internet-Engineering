@@ -77,6 +77,18 @@
     font-size: x-large;
   }
 
+  #lists {
+    margin-top: auto;
+  }
+
+  #list {
+    color: black;
+  }
+
+  #listBtn {
+    background: var(--secondary-color);
+  }
+
   .comment_section {
     width: 100%;
   }
@@ -159,7 +171,17 @@
       <video controls id="trailer">
       </video>
       <button class="addBtn" id="addBtn"><span>&#x2795;</span></button>
-      <select id="lists"></select>
+      <div id="lists" style="display: none;">
+        <select id="list"></select>
+        <button id="listBtn">اضافه کردن</button>
+      </div>
+      <script>
+        document.getElementById("addBtn").addEventListener("click", () => {
+          const listsElem = document.getElementById("lists");
+          listsElem.style.display =
+            listsElem.style.display === "none" ? "inline" : "none";
+        });
+      </script>
     </div>
     <div class="comment_section">
       <form action="../AJAX/comment.php" method="post">
@@ -180,7 +202,7 @@
         </div>
         <div>
           <button type="submit" class="submitBtn" id="closeModal">ثبت نظر</button>
-          <button class="closeBtn" id="closeModal">بستن</button>
+          <button type="reset" class=" closeBtn" id="closeModal">بستن</button>
         </div>
       </form>
     </div>
