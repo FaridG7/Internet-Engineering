@@ -81,7 +81,8 @@
     margin-top: auto;
   }
 
-  #list {
+  #list,
+  #list option {
     color: black;
   }
 
@@ -117,6 +118,22 @@
 
   .comment_section form textarea {
     width: 300px;
+  }
+
+  .user_comments {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .user_comments div {
+    background: var(--primary-color);
+    border: white solid 1px;
+  }
+
+  .user_comments div * {
+    display: inline;
+    padding: 5px;
   }
 
   .closeBtn,
@@ -206,6 +223,7 @@
           <button type="reset" class=" closeBtn" id="closeModal">بستن</button>
         </div>
       </form>
+      <div class="user_comments" id="user_comments"></div>
     </div>
   </div>
 </div>

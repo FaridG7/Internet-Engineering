@@ -15,6 +15,7 @@ const trailer = document.getElementById("trailer");
 const movieID = document.getElementById("movieIDinput");
 const listSelectElem = document.getElementById("list");
 const listBtn = document.getElementById("listBtn");
+const userCommentsElem = document.getElementById("user_comments");
 
 let movie_id = undefined;
 
@@ -49,17 +50,22 @@ openModalBtns.forEach((btn) => {
 
     const fetch1 = fetch(`/AJAX/get_movie.php?id=${movie_id}`);
     const fetch2 = fetch("/AJAX/lists.php");
+    const fetch3 = fetch(`/AJAX/comment.php?movie_id=${movie_id}`);
 
-    Promise.all([fetch1, fetch2])
-      .then(([response1, response2]) => {
-        if (response1.ok && response2.ok)
-          return Promise.all([response1.json(), response2.json()]);
+    Promise.all([fetch1, fetch2, fetch3])
+      .then(([response1, response2, response3]) => {
+        if (response1.ok && response2.ok && response3.ok)
+          return Promise.all([
+            response1.json(),
+            response2.json(),
+            response3.json(),
+          ]);
         else
           throw new Error(
-            `responce1: ${response1.status}, responce2: ${response2.status}`
+            `responce1: ${response1.status}, responce2: ${response2.status}, responce3: ${response3.status}`
           );
       })
-      .then(([data, lists]) => {
+      .then(([data, lists, comments]) => {
         movieTitle.innerHTML = data.title;
         year.innerHTML = data.year;
         director.innerHTML = data.director;
@@ -71,11 +77,25 @@ openModalBtns.forEach((btn) => {
         newSourceElem.src = `/assets/trailers/${movie_id}.mp4`;
         trailer.replaceChildren(newSourceElem);
         movieID.value = movie_id;
+        listSelectElem.innerHTML = "";
         lists.forEach((list) => {
           const optionElem = document.createElement("option");
           optionElem.value = list.id;
           optionElem.innerHTML = list.title;
           listSelectElem.appendChild(optionElem);
+        });
+        userCommentsElem.innerHTML = "";
+        comments.forEach((comment) => {
+          const commentElem = document.createElement("div");
+          const userLabel = document.createElement("label");
+          const commentText = document.createElement("p");
+          userLabel.innerHTML = `${comment.user}(${"★".repeat(
+            comment.rating
+          )}): `;
+          commentText.innerHTML = comment.text;
+          commentElem.appendChild(userLabel);
+          commentElem.appendChild(commentText);
+          userCommentsElem.appendChild(commentElem);
         });
       })
       .then(() => {

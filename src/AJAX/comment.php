@@ -48,29 +48,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(500);
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $movie_id = $_GET['movie_id'];
-
-    if (empty($movie_id)) {
-        http_response_code(400);
-        exit;
-    }
     try {
-        $stmt = $conn->prepare("SELECT * FROM comments WHERE movie_id = ?");
-        $stmt->bind_param("i", $movie_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $movie_id = $_GET['movie_id'];
+
+        if (empty($movie_id)) {
+            http_response_code(400);
+            exit;
+        }
+        $result = $conn->query("SELECT users.username AS user, rating, text
+         FROM comments JOIN users ON users.id = comments.user_id WHERE movie_id = $movie_id");
+        $comments = [];
+        while ($row = $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
         if ($result->num_rows > 0) {
             http_response_code(200);
             header('Content-Type: application/json');
-            echo json_encode($result->fetch_assoc());
+            echo json_encode($comments);
         } else {
             http_response_code(404);
         }
-        $stmt->close();
-        exit;
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
+    } finally {
+        $conn->close();
     }
 } else {
     http_response_code(405);
