@@ -61,13 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         while ($row = $result->fetch_assoc()) {
             $comments[] = $row;
         }
-        if ($result->num_rows > 0) {
-            http_response_code(200);
-            header('Content-Type: application/json');
-            echo json_encode($comments);
-        } else {
-            http_response_code(404);
-        }
+        http_response_code(200);
+        header('Content-Type: application/json');
+        echo json_encode($comments);
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
