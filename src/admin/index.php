@@ -111,22 +111,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <title>Dashboard</title>
     </head>
 
-    <body dir="rtl">
-        <form action="./index.php" method="post" validate>
-            <input type="text" placeholder="title" name="title" required>
-            <input type="text" placeholder="director" name="director" required>
-            <input type="number" placeholder="year" name="produce_year" required>
-            <textarea name="summary" placeholder="summary" required></textarea>
+    <body>
+        <form action="./index.php" method="post" validate><br>
+            <input type="text" placeholder="title" name="title" required><br>
+            <input type="text" placeholder="director" name="director" required><br>
+            <input type="number" placeholder="year" name="produce_year" required><br>
+            <textarea name="summary" placeholder="summary" required></textarea><br>
             <select name="genres[]" required multiple>
                 <?php
                 while ($genre = $genres_result->fetch_assoc()) {
                     echo '<option value="' . $genre['id'] . '">' . $genre['title'] . '</option>';
                 }
                 ?>
-            </select>
-            <input type="text" placeholder="star 1" name="star[]">
-            <input type="text" placeholder="star 2" name="star[]">
-            <input type="text" placeholder="star 3" name="star[]">
+            </select><br>
+            <input type="text" placeholder="star 1" name="stars[]"><br>
+            <input type="text" placeholder="star 2" name="stars[]"><br>
+            <input type="text" placeholder="star 3" name="stars[]"><br>
             <input type="submit" value="add">
         </form>
     </body>
