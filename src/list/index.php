@@ -35,7 +35,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php
     } else {
 
-        $list_members = $conn->query("SELECT movie_id FROM list_member WHERE list_id");
+        $list_members = $conn->query("SELECT movie_id FROM list_member WHERE list_id= $list_id");
     ?>
 
         <?php
@@ -45,13 +45,13 @@ if (session_status() === PHP_SESSION_NONE) {
         <main>
             <?php
             if ($list_members->num_rows > 0) {
+                echo "<ul>";
                 while ($list_member = $list_members->fetch_assoc()) {
-                    echo "<ul>";
                     echo '<li class="poster"><button id="openModal"><img src="/assets/posters/'
                         . $list_member['movie_id'] . '.webp"  movie_id='
                         . $list_member['movie_id'] . ' /></button></li>';
-                    echo "</ul>";
                 }
+                echo "</ul>";
             } else {
                 echo '<h2>این لیست خالی است.</h2>';
             }
