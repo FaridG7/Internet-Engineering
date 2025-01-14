@@ -81,7 +81,7 @@ if ($slides_result && $slides_result->num_rows > 0) {
   <div class="slideshow-container">
     <?php
     while ($slide = $slides_result->fetch_assoc()) {
-      echo '<div class="slide"><button id="openModal"><img src="/assets/posters/' . $slide['id'] . '.webp"/></button></div>';
+      echo '<div class="slide"><button><img src="/assets/posters/' . $slide['id'] . '.webp"/></button></div>';
     }
     ?>
     <button class="prev" onclick="changeSlide(-1)">&#10095;</button>
